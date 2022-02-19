@@ -12,6 +12,7 @@ const solution = (T, R) => {
   let totalGroups = 0;
 
   for(let i = 0; i < T.length; i++) {
+    // Removing this and finding the index of group number outside of the loop would improve time complexity;
     let currentTestString = T[i].substring(0, groupStringsLength);
 
     if (collection[currentTestString] === undefined) {
