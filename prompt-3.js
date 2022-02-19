@@ -4,17 +4,15 @@ const solution = (T, R) => {
   let pointsCount = 0;
 
   // get length of group string without the a, b, c
-  let sortedByStringsLength = T.sort((a, b) => a.length - b.length);
-  let groupStringsLength = sortedByStringsLength[0].length;
+  let indexOfGroupNumber = T[0].search(/\d/);
+  let testName = T[0].substring(0, indexOfGroupNumber);
 
   // store data in an obj where key is the group and value is an array [amount of times group is tested, amount of 'OK]
   let collection = {};
   let totalGroups = 0;
 
   for(let i = 0; i < T.length; i++) {
-    // Removing this and finding the index of group number outside of the loop would improve time complexity;
-    let currentTestString = T[i].substring(0, groupStringsLength);
-
+    let currentTestString = testName + T[i][indexOfGroupNumber];
     if (collection[currentTestString] === undefined) {
       collection[currentTestString] = [1, 0];
       totalGroups++;
@@ -35,7 +33,6 @@ const solution = (T, R) => {
   // iterate through object
   for (let testGroup in collection) {
     // if object [testGroup][0] is equal to object[testGroup][1]
-    console.log(collection[testGroup])
     if (collection[testGroup][0] === collection[testGroup][1]) {
       // increase pointsCount by 1
       pointsCount++;
